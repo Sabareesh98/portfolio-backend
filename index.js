@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -8,11 +9,11 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
-
+console.log("MONGO_URI =", process.env.MONGO_URI);
 // MongoDB Connection
 mongoose
-  .connect("mongodb://127.0.0.1:27017/portfolio_entries")
-  .then(() => console.log("✅ MongoDB Connected"))
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("✅ MongoDB Atlas Connected"))
   .catch((err) => console.error("❌ MongoDB Connection Error:", err));
 
 // POST API
